@@ -1,9 +1,14 @@
-<!doctype html>
+# Generate a clean, ready-to-upload index.html with fixes:
+# - Set WhatsApp "Scrivi a Chiara" to a working fallback (MySenza: 393717771328) with a clear TODO comment
+# - Remove optional Venezia placeholders (venezia1/2)
+# - Keep all sections & gallery camere
+# - Italian + short EN note
+clean_html = r"""<!doctype html>
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chiara Sottomarina · Appartamenti al mare</title>
-<meta name="description" content="Appartamenti al mare a Sottomarina. Info utili, foto, cosa fare tra lungomare, Chioggia e Venezia. Offerta ospiti: profumo MySenza.">
+<meta name="description" content="Appartamenti al mare a Sottomarina (Chioggia). Info utili, foto, cosa fare tra lungomare, Chioggia e Venezia. Offerta ospiti: profumo MySenza.">
 <style>
 :root{
   --bg:#07131b;
@@ -12,7 +17,6 @@
   --muted:#b7c7d7;
   --line:#123448;
   --accent:#38bdf8;
-  --accent2:#60a5fa;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:linear-gradient(180deg,#061420,#0a1b28 45%,#0a1d2c);color:var(--text);font:16px/1.6 Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
@@ -34,7 +38,6 @@ h2{margin:0 0 10px 0;font-size:clamp(22px,3vw,30px)}
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .gallery img{width:100%;aspect-ratio:16/10;border-radius:10px;border:1px solid var(--line);object-fit:cover}
 .small{font-size:14px;color:var(--muted)}
-.kv{width:100%;aspect-ratio:3/1;border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .footer{padding:22px 0;border-top:1px solid var(--line);color:var(--muted);margin-top:36px}
 .pill{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--line);font-size:12px;color:#cfe0ef}
 ul.clean{margin:8px 0;padding-left:18px}
@@ -42,7 +45,6 @@ ul.clean{margin:8px 0;padding-left:18px}
 .notice{font-size:13px;color:#9fb3c8;margin-top:6px}
 .box-offerta{background:linear-gradient(180deg,rgba(56,189,248,.14),rgba(96,165,250,.10));border:1px dashed var(--accent);border-radius:14px;padding:14px}
 hr.sep{border:none;border-top:1px solid var(--line);margin:12px 0}
-.placeholder{opacity:.6}
 </style>
 </head>
 <body>
@@ -64,15 +66,16 @@ hr.sep{border:none;border-top:1px solid var(--line);margin:12px 0}
   <section id="appartamenti" class="section">
     <h2>Appartamenti</h2>
 
-<div class="gallery" style="margin-top:8px">
-  <figure><img src="media/C1.jpg" alt="Soggiorno luminoso con cucina attrezzata e TV"><figcaption class="small">Soggiorno luminoso con cucina attrezzata e TV</figcaption></figure>
-  <figure><img src="media/C2.jpg" alt="Bagno moderno con doccia e finiture in marmo"><figcaption class="small">Bagno moderno con doccia e finiture in marmo</figcaption></figure>
-  <figure><img src="media/C3.jpg" alt="Camera matrimoniale con armadio e ampie finestre"><figcaption class="small">Camera matrimoniale con armadio e ampie finestre</figcaption></figure>
-  <figure><img src="media/C4.jpg" alt="Cucina moderna e zona pranzo"><figcaption class="small">Cucina moderna e zona pranzo</figcaption></figure>
-  <figure><img src="media/C5.jpg" alt="Zona living con tavolo e accesso al bagno"><figcaption class="small">Zona living con tavolo e accesso al bagno</figcaption></figure>
-</div>
+    <!-- GALLERY CAMERE -->
+    <div class="gallery" style="margin-top:8px">
+      <figure><img src="media/C1.jpg" alt="Soggiorno luminoso con cucina attrezzata e TV"><figcaption class="small">Soggiorno luminoso con cucina attrezzata e TV</figcaption></figure>
+      <figure><img src="media/C2.jpg" alt="Bagno moderno con doccia e finiture in marmo"><figcaption class="small">Bagno moderno con doccia e finiture in marmo</figcaption></figure>
+      <figure><img src="media/C3.jpg" alt="Camera matrimoniale con armadio e ampie finestre"><figcaption class="small">Camera matrimoniale con armadio e ampie finestre</figcaption></figure>
+      <figure><img src="media/C4.jpg" alt="Cucina moderna e zona pranzo"><figcaption class="small">Cucina moderna e zona pranzo</figcaption></figure>
+      <figure><img src="media/C5.jpg" alt="Zona living con tavolo e accesso al bagno"><figcaption class="small">Zona living con tavolo e accesso al bagno</figcaption></figure>
+    </div>
 
-    <div class="grid cols-2">
+    <div class="grid cols-2" style="margin-top:10px">
       <div class="card">
         <div class="media"><img src="media/sotto1.jpg" alt="Spiaggia di Sottomarina"></div>
         <ul class="clean small">
@@ -113,10 +116,7 @@ hr.sep{border:none;border-top:1px solid var(--line);margin:12px 0}
         <p class="small">Raggiungibile con traghetto da Chioggia: Piazza San Marco, calli e bacari in giornata.</p>
         <div class="gallery" style="margin-top:8px">
           <img src="media/traghetto-chioggia-venezia7.png" alt="Laguna verso Venezia">
-          <img src="media/venezia1.jpg" class="placeholder" alt="Venezia (foto opzionale)">
-          <img src="media/venezia2.jpg" class="placeholder" alt="Venezia (foto opzionale)">
         </div>
-        <p class="small notice">Se non usi immagini di Venezia aggiuntive, lascia pure questi due slot vuoti o rimuovili.</p>
       </div>
       <div class="card">
         <h3 style="margin:4px 0 8px 0">Mangiare & Relax</h3>
@@ -157,7 +157,8 @@ hr.sep{border:none;border-top:1px solid var(--line);margin:12px 0}
         <p class="small">WhatsApp: <strong>………</strong></p>
         <p class="small">Email: <strong>………</strong></p>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
-          <a class="btn primary" href="https://api.whatsapp.com/send?phone=INSERISCI_NUMERO_CHIARA&text=Ciao!%20Vorrei%20informazioni%20e%20disponibilit%C3%A0." target="_blank" rel="noopener">Scrivi a Chiara</a>
+          <!-- TODO: quando hai il numero di Chiara, sostituisci 393717771328 con il suo -->
+          <a class="btn primary" href="https://api.whatsapp.com/send?phone=393717771328&text=Ciao!%20Vorrei%20informazioni%20e%20disponibilit%C3%A0." target="_blank" rel="noopener">Scrivi a Chiara</a>
           <a class="btn" href="#appartamenti">Torna su</a>
         </div>
       </div>
@@ -192,3 +193,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 </script>
 </body>
 </html>
+"""
+out = "/mnt/data/index_pronto.html"
+with open(out, "w", encoding="utf-8") as f:
+    f.write(clean_html)
+
+out
