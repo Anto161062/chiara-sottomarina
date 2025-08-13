@@ -1,7 +1,12 @@
-# Create updated index.html preserving structure, adding lightbox, sea-blue theme, bold captions,
-# swapping contact image, and keeping the "Il profumo che senti" section intact.
+# Create an updated index.html variant with ONLY the requested changes:
+# - Keep structure/spacing identical to the previous "index_mare_lightbox_preserve.html"
+# - In the PROFUMO section: change the second button to open the catalog PDF
+# - In CONTATTI: change the CTA text to "Informazioni e prenotazioni WhatsApp"
+#   and prefill a bilingual booking template in the WhatsApp message
+#
+# Assumption: the PDF will be uploaded to repo root as "catalogo_mysenza.pdf"
 
-html = r"""<!doctype html>
+updated_html = r"""<!doctype html>
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +14,6 @@ html = r"""<!doctype html>
 <meta name="description" content="Appartamenti al mare a Sottomarina (Chioggia). Info utili, foto, cosa fare tra lungomare, Chioggia e Venezia. Offerta ospiti: profumo MySenza.">
 <style>
 :root{
-  /* SEA BLUE THEME (only colors changed, structure untouched) */
   --bg:#0f3f5a;
   --panel:#124b69;
   --text:#eaf3fb;
@@ -46,21 +50,16 @@ ul.clean{margin:8px 0;padding-left:18px}
 .notice{font-size:13px;color:#d3ecff;margin-top:6px}
 .box-offerta{background:linear-gradient(180deg,rgba(56,189,248,.14),rgba(96,165,250,.10));border:1px dashed var(--accent);border-radius:14px;padding:14px}
 hr.sep{border:none;border-top:1px solid var(--line);margin:12px 0}
-/* Make captions bolder without changing markup */
 figcaption.small{font-weight:700}
-/* Lightbox (added, does not alter layout) */
 #lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:9999}
 #lightbox img{max-width:90%;max-height:90%;border-radius:10px;box-shadow:0 0 24px rgba(0,0,0,.5)}
 #lightbox.closehint{cursor:zoom-out}
-/* Specific zoom on contacts image (small source, visually enlarged) */
 .media img.zoomed{transform:scale(1.12)}
 .media img.zoomed:hover{transform:scale(1.16)}
 </style>
 </head>
 <body>
-<!-- Lightbox overlay -->
 <div id="lightbox"><img alt=""></div>
-
 <div class="container">
 
   <span class="badge">QR Emozionale™ · Hospitality</span>
@@ -75,11 +74,8 @@ figcaption.small{font-weight:700}
     <span class="pill">Contenuti aggiornabili senza ristampa · ITA <span class="lang">/ ENG</span></span>
   </div>
 
-  <!-- APPARTAMENTI (structure preserved) -->
   <section id="appartamenti" class="section">
     <h2>Appartamenti</h2>
-
-    <!-- GALLERY CAMERE (no structure changes, captions now bold) -->
     <div class="gallery" style="margin-top:8px">
       <figure><img src="media/C1.jpg" alt="Soggiorno luminoso con cucina attrezzata e TV"><figcaption class="small">Soggiorno luminoso con cucina attrezzata e TV</figcaption></figure>
       <figure><img src="media/C2.jpg" alt="Bagno moderno con doccia e finiture in marmo"><figcaption class="small">Bagno moderno con doccia e finiture in marmo</figcaption></figure>
@@ -109,7 +105,6 @@ figcaption.small{font-weight:700}
     </div>
   </section>
 
-  <!-- DINTORNI (unchanged structure) -->
   <section id="dintorni" class="section">
     <h2>Cosa fare</h2>
     <div class="grid cols-3">
@@ -143,7 +138,6 @@ figcaption.small{font-weight:700}
     </div>
   </section>
 
-  <!-- BOX PROFUMO (LEFT UNCHANGED, just color theme) -->
   <section id="profumo" class="section">
     <div class="box-offerta">
       <h2 style="margin:0 0 6px 0">Il profumo che senti</h2>
@@ -154,13 +148,12 @@ figcaption.small{font-weight:700}
         <a class="btn primary" target="_blank" rel="noopener"
            href="https://api.whatsapp.com/send?phone=393717771328&text=Ciao!%20Sono%20ospite%20di%20Chiara%20a%20Sottomarina.%20Vorrei%20ordinare%20il%20profumo%20200ml%20(+200ml%20omaggio).%20Consegna%20prima%20della%20partenza.">
            Ordina su WhatsApp</a>
-        <a class="btn" target="_blank" rel="noopener" href="https://anto161062.github.io/mysenza-shop-/">Vetrina MySenza</a>
+        <a class="btn" target="_blank" rel="noopener" href="./catalogo_mysenza.pdf">Catalogo MySenza</a>
       </div>
       <p class="small notice">Pagamento in contanti o carta. Consegna in struttura prima della partenza o spedizione a casa.</p>
     </div>
   </section>
 
-  <!-- CONTATTI (same structure; image swapped & visually enlarged via class) -->
   <section id="contatti" class="section">
     <h2>Prenotazioni & Contatti</h2>
     <div class="grid cols-2">
@@ -170,7 +163,7 @@ figcaption.small{font-weight:700}
         <p class="small">WhatsApp: <strong>………</strong></p>
         <p class="small">Email: <strong>………</strong></p>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
-          <a class="btn primary" href="https://api.whatsapp.com/send?phone=393717771328&text=Ciao!%20Vorrei%20informazioni%20e%20disponibilit%C3%A0." target="_blank" rel="noopener">Scrivi a Chiara</a>
+          <a class="btn primary" href="https://api.whatsapp.com/send?phone=393717771328&text=Ciao!%0A%0A**Prenotazione%20soggiorno**%0ADate:%20dal%20_____%20al%20_____%0APersone:%20_____%0ARichieste%20particolari:%20_____%0A%0A---%20EN%20---%0A**Booking%20request**%0ADates:%20from%20_____%20to%20_____%0AGuests:%20_____%0ASpecial%20requests:%20_____%0A" target="_blank" rel="noopener">Informazioni e prenotazioni WhatsApp</a>
           <a class="btn" href="#appartamenti">Torna su</a>
         </div>
       </div>
@@ -186,18 +179,16 @@ figcaption.small{font-weight:700}
   </div>
 </div>
 
-<!-- ENG section turned into a proper mini-section -->
 <div class="container" style="padding-top:0">
   <div class="card">
     <h3 style="margin:0 0 8px 0">EN · Guest Info</h3>
     <p class="small">Seaside apartments in Sottomarina (Chioggia). Wide sandy beach and a lively promenade at night. Easy day trips to Chioggia and Venice by boat.</p>
     <p class="small"><strong>Guest Offer</strong>: the home fragrance you smell on arrival can be purchased: 200 ml for €20 + 200 ml for free (same scent or different). We deliver before departure or ship to your home.</p>
-    <p class="small">For bookings and info, contact us on WhatsApp (button above).</p>
+    <p class="small">For bookings and info, tap the button “Informazioni e prenotazioni WhatsApp” above and send us your dates.</p>
   </div>
 </div>
 
 <script>
-// Smooth scroll (unchanged)
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click', e=>{
     const id = a.getAttribute('href').slice(1);
@@ -205,8 +196,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
   });
 });
-
-// Simple Lightbox (no layout changes)
 const lb = document.getElementById('lightbox');
 const lbImg = lb.querySelector('img');
 document.querySelectorAll('.gallery img, .media img').forEach(img=>{
@@ -225,8 +214,8 @@ lb.addEventListener('click', ()=>{
 </body>
 </html>
 """
-out_path = "/mnt/data/index_mare_lightbox_preserve.html"
-with open(out_path, "w", encoding="utf-8") as f:
-    f.write(html)
+out_file = "/mnt/data/index_booking_catalogo.html"
+with open(out_file, "w", encoding="utf-8") as f:
+    f.write(updated_html)
 
-out_path
+out_file
